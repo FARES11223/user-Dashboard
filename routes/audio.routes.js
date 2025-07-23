@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const { verifyToken } = require("../middleware/authMiddleware");
-const audioUpload = require("../middleware/uploadAudio"); // Unique name
-
-const audioController = require("../controllers/audioController");
+const uploadAudioMiddleware = require("../middleware/uploadAudio");
+const { audioValidator } = require("../middleware/audioValidator");
+const { uploadAudio } = require("../controllers/audioController");
 
 router.post(
   "/upload",
   verifyToken,
-  audioUpload.single("file"),
-  audioController.uploadAudio
+  audioValidator,
+  uploadAudioMiddleware.single("audioFile"),
+  uploadAudio
 );
 
 module.exports = router;

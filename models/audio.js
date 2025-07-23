@@ -1,18 +1,8 @@
 const mongoose = require("mongoose");
 
-const ALLOWED_GENRES = [
-  "pop",
-  "rock",
-  "hiphop",
-  "jazz",
-  "classical",
-  "electronic",
-  "rnb",
-  "country",
-];
-
 const audioSchema = new mongoose.Schema(
   {
+    audioFile: String,
     title: {
       type: String,
       required: [true, "Title is required"],
@@ -22,7 +12,6 @@ const audioSchema = new mongoose.Schema(
     genre: {
       type: String,
       required: [true, "Genre is required"],
-      enum: ALLOWED_GENRES,
       lowercase: true,
     },
     isPrivate: {
